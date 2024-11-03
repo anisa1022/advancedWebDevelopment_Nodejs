@@ -1,22 +1,18 @@
-const http = require("http");
-const taskRoutes = require("../routes/taskRoutes");
+const http = require('http');
+const taskRoutes = require('./routes/taskRoutes');
 
+const port = 9000;
+const hostname = "localhost";
 
-const PORT = 9000;
-const HOSTNAME = 'localhost';
-const server = http.createServer((req,res)=>{
-    if(req.url.startsWith('./tasks')){
-        taskRoutes(req,res)
-    }
-    else{
-        res.writeHead(404, 'NOT FOUND',{'content-typ': 'application/json'})
-        res.end(JSON.stringify({
-            message:'Page not found'
-        }))
+const server = http.createServer((req, res) => {
+    if (req.url.startsWith('/tasks')) {
+        taskRoutes(req, res); 
+    } else {
+        res.writeHead(404, 'Not Found', { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'sorry you got lost !' }));
     }
 });
 
-server.listen(PORT, HOSTNAME ,()=>{
-    console.log(`server running at ${PORT}`);
-
-})
+server.listen(port, hostname, () => {
+    console.log(`Server running on ${port}`);
+});

@@ -1,26 +1,32 @@
-const { deleteTask, getTask ,updateTask,createTask } = require("../controllers/taskController")
+const { createTask, getTasks, updateTask, deleteTask } = require("../controllers/tasksController");
 
-const taskRoutes = (req ,res)=>{
-    if(req.method == 'GET'){
-        getTask(req,res)
-    }
-    else if(req.method == 'POST'){
-        createTask(req,res)
+const taskRoutes=(req,res) =>{
+//TODO  define
 
-    }
-    else if(req.method == 'PATCH'){
-        updateTask(req,task)
 
-    }
-    else if(req.method == 'DELETE'){
-        deleteTask(req,res)
-    }
-    else{
-        res.writeHead(404, 'NOT FOUND',{'content-typ': 'application/json'})
-        res.end(JSON.stringify({
-            message:'Page not found'
-        }))
-    }
+if(req.method==='GET'){
+
+    getTasks(req,res);
+
 }
 
-module.exports = taskRoutes
+else if (req.method==='POST'){ 
+    createTask(req,res);
+}
+else if (req.method==='PATCH'){
+    updateTask(req,res);
+}
+else if (req.method==='DELETE'){
+    deleteTask(req,res);
+}
+
+else {
+    res.writeHead(404, 'Data Not Found', { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ message: 'Unknown Method required.' }));
+}
+
+
+}
+
+
+module.exports=taskRoutes;
